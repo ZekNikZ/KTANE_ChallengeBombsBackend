@@ -3,6 +3,7 @@ import AccessToken from './AccessToken';
 import Pack from './Pack';
 import Role from '../../enums/Role';
 import Run from './Run';
+import Webhook from './Webhook';
 
 @Entity('users')
 export default class User {
@@ -29,6 +30,9 @@ export default class User {
 
     @ManyToMany(() => Run, (run) => run.experts)
     expertRuns!: Run[];
+
+    @OneToMany(() => Webhook, (webhook) => webhook.owner)
+    webhooks!: Webhook[];
 
     constructor(
         id: string,
