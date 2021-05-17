@@ -1,12 +1,15 @@
-import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Bomb from './Bomb';
 
 @Entity('pools')
 export default class Pool {
-    @ManyToOne(() => Bomb, (bomb) => bomb.pools, { primary: true })
+    @PrimaryGeneratedColumn()
+    id!: number;
+
+    @ManyToOne(() => Bomb, (bomb) => bomb.pools)
     bomb!: Bomb;
 
-    @PrimaryColumn('smallint')
+    @Column('smallint')
     count!: number;
 
     @Column('character varying', { array: true })

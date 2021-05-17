@@ -1,13 +1,22 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
+import {
+    Column,
+    Entity,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
 import Mission from './Mission';
 import Pool from './Pool';
 
 @Entity('bombs')
 export default class Bomb {
-    @ManyToOne(() => Mission, (mission) => mission.bombs, { primary: true })
+    @PrimaryGeneratedColumn()
+    id!: number;
+
+    @ManyToOne(() => Mission, (mission) => mission.bombs)
     mission!: Mission;
 
-    @PrimaryColumn('smallint')
+    @Column('smallint')
     order!: number;
 
     @Column('smallint')
