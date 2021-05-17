@@ -1,6 +1,8 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
 import AccessToken from './AccessToken';
-import Role from '../../roles/Role';
+import Pack from './Pack';
+import Role from '../../enums/Role';
+import Run from './Run';
 
 @Entity('users')
 export default class User {
@@ -11,7 +13,7 @@ export default class User {
     username!: string;
 
     @Column('character varying', { nullable: true })
-    avatar!: string | null;
+    avatarURL!: string | null;
 
     @Column({ type: 'enum', enum: Role, default: Role.USER })
     role!: Role;
@@ -19,15 +21,24 @@ export default class User {
     @OneToMany(() => AccessToken, (token) => token.owner)
     tokens!: AccessToken[];
 
+    @OneToMany(() => Pack, (pack) => pack.owner)
+    packs!: Pack[];
+
+    @OneToMany(() => Run, (run) => run.defuser)
+    defuserRuns!: Run[];
+
+    @ManyToMany(() => Run, (run) => run.experts)
+    expertRuns!: Run[];
+
     constructor(
         id: string,
         username: string,
-        avatar?: string | null | undefined,
+        avatarURL?: string | null | undefined,
         role?: Role
     ) {
         this.id = id;
         this.username = username;
-        this.avatar = avatar || null;
+        this.avatarURL = avatarURL || null;
 
         if (role) {
             this.role = role;

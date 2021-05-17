@@ -2,7 +2,7 @@ import * as status from '../../../util/status';
 import { NextFunction, Request, Response, Router } from 'express';
 import { mustBeOwner, requiresRole } from '../../../roles/middleware';
 import AccessToken from '../../../db/models/AccessToken';
-import Role from '../../../roles/Role';
+import Role from '../../../enums/Role';
 import User from '../../../db/models/User';
 import { getRepository } from 'typeorm';
 import { noApiKeyAccess } from '../../../auth/middleware';

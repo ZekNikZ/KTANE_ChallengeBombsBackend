@@ -1,6 +1,6 @@
 import * as status from '../util/status';
 import { NextFunction, Request, Response } from 'express';
-import Role from './Role';
+import Role from '../enums/Role';
 import checkRole from './checkRole';
 import { needsAuth } from '../auth/middleware';
 

@@ -4,7 +4,7 @@ import { getRepository } from 'typeorm';
 export async function getOrCreateUser(
     id: string,
     username?: string,
-    avatar?: string | null | undefined
+    avatarURL?: string | null | undefined
 ): Promise<User | undefined> {
     const userRepository = getRepository(User);
     const user = await userRepository.findOne(id);
@@ -13,8 +13,8 @@ export async function getOrCreateUser(
         if (username) {
             user.username = username;
         }
-        if (avatar) {
-            user.avatar = avatar;
+        if (avatarURL) {
+            user.avatarURL = avatarURL;
         }
 
         await userRepository.save(user);

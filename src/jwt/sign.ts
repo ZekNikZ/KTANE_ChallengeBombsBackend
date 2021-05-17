@@ -23,6 +23,6 @@ export function sign(
 }
 
 export function createUserJWT(user: User, expiresIn?: number | string): string {
-    const { id, username, role, avatar } = user;
-    return sign({ id, username, role, avatar }, expiresIn);
+    const { id, username, role, avatarURL } = user;
+    return sign({ id, username, role, avatarURL }, expiresIn);
 }
