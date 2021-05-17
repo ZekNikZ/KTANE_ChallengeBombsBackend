@@ -1,0 +1,21 @@
+GET /profiles                   => list all public profiles
+GET /users/:id/profiles         => list all profiles belonging to user
+GET /categories/:id/profiles    => list all profiles of category
+
+GET /profiles/:id               => get profile information
+POST /profiles                  => post profile
+DELETE /profiles/:id            => delete profile
+PUT /profiles/:id               => edit profile information (including editors)
+
+POST /profiles/search           => get information of several profiles at once; body: {queries:[]}
+
+GET /categories                 => list all categories
+POST /categories                => new category
+PUT /categories/:id             => edit category settings
+DELETE /categories/:id          => delete category
+
+GET /users                      => list all users
+POST /users/discord/oauth  => create user from oauth code
+POST /users/discord/info   => create user from discord info
+PUT /users/:id                  => update user info/roles
+DELETE /users/:id               => remove user

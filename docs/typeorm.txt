@@ -1,0 +1,6 @@
+ this.groupRepository.createQueryBuilder('group')
+   .leftJoinAndSelect('group.persons', 'persons')
+   .leftJoinAndSelect('persons.items', 'items')
+   .where('items.active =:active', {active: true})
+   .andWhere('group.id IN (:...groupIds)', {groupIds})       
+   .getMany();
