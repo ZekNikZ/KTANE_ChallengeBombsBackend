@@ -13,7 +13,9 @@ export default class Bomb {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @ManyToOne(() => Mission, (mission) => mission.bombs)
+    @ManyToOne(() => Mission, (mission) => mission.bombs, {
+        onDelete: 'CASCADE',
+    })
     mission!: Mission;
 
     @Column('smallint')
@@ -32,16 +34,19 @@ export default class Bomb {
     pools!: Pool[];
 
     constructor(
-        mission: Mission,
         order: number,
         repeat: number,
         initialTime: number,
-        strikeCount: number
+        strikeCount: number,
+        mission?: Mission
     ) {
-        this.mission = mission;
         this.order = order;
         this.repeat = repeat;
         this.initialTime = initialTime;
         this.strikeCount = strikeCount;
+
+        if (mission) {
+            this.mission = mission;
+        }
     }
 }

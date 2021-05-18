@@ -1,0 +1,2 @@
+[ ] Replace all deletes with soft deletes
+[ ] PUT /missions

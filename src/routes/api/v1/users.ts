@@ -57,8 +57,6 @@ router.get('/', requiresRole(Role.ADMIN), async (req, res) => {
     res.send(await getRepository(User).find());
 });
 
-// TODO: PUT
-
 router
     .route('/:user_id/tokens')
     .get(mustBeOwner(), noApiKeyAccess(), getUserInfo, async (req, res) => {

@@ -9,6 +9,8 @@ declare namespace Express {
         data?: {
             user?: import('../db/models/User');
             token?: import('../db/models/AccessToken');
+            pack?: import('../db/models/Pack');
+            mission?: import('../db/models/Mission');
         };
     }
 }

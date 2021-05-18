@@ -11,7 +11,7 @@ export default class Mission {
     @Column()
     name!: string;
 
-    @ManyToOne(() => Pack, (pack) => pack.missions)
+    @ManyToOne(() => Pack, (pack) => pack.missions, { onDelete: 'CASCADE' })
     pack!: Pack;
 
     @OneToMany(() => Bomb, (bomb) => bomb.mission)

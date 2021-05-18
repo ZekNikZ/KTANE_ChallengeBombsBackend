@@ -3,7 +3,10 @@ import User from './User';
 
 @Entity('access_tokens')
 export default class AccessToken {
-    @ManyToOne(() => User, (user) => user.tokens, { primary: true })
+    @ManyToOne(() => User, (user) => user.tokens, {
+        primary: true,
+        onDelete: 'CASCADE',
+    })
     owner!: User;
 
     @PrimaryColumn()

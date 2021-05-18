@@ -6,7 +6,7 @@ export default class Pool {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @ManyToOne(() => Bomb, (bomb) => bomb.pools)
+    @ManyToOne(() => Bomb, (bomb) => bomb.pools, { onDelete: 'CASCADE' })
     bomb!: Bomb;
 
     @Column('smallint')

@@ -36,10 +36,34 @@ export function mustBeOwner() {
     ): Promise<void> => {
         function permCheck() {
             // Check permissions
-            if (req.params.user_id !== req.user?.id) {
-                status.forbidden(res);
-            } else {
+            if (req.params.user_id === req.user?.id) {
                 next();
+            } else {
+                status.forbidden(res);
+            }
+        }
+
+        // Call auth middleware first if necessary
+        if (!req.user) {
+            needsAuth()(req, res, permCheck);
+        } else {
+            permCheck();
+        }
+    };
+}
+
+export function mustBeOwnerOrRole(role: Role) {
+    return async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> => {
+        function permCheck() {
+            // Check permissions
+            if (req.params.user_id === req.user?.id || req.user?.role >= role) {
+                next();
+            } else {
+                status.forbidden(res);
             }
         }
 

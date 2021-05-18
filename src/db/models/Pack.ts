@@ -16,7 +16,7 @@ export default class Pack {
     @Column('character varying', { nullable: true })
     previewURL!: string | undefined;
 
-    @ManyToOne(() => User, (user) => user.packs)
+    @ManyToOne(() => User, (user) => user.packs, { onDelete: 'NO ACTION' })
     owner!: User;
 
     @OneToMany(() => Mission, (mission) => mission.pack)

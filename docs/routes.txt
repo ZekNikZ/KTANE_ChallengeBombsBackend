@@ -1,0 +1,51 @@
+users
+================================
+GET     /users
+POST    /users
+
+GET     /users/:user_id
+PUT     /users/:user_id
+DELETE  /users/:user_id
+
+GET     /users/:user_id/avatar
+
+GET     /users/:user_id/packs
+
+GET     /users/:user_id/runs
+
+GET     /users/:user_id/tokens
+POST    /users/:user_id/tokens
+
+PUT     /users/:user_id/tokens/:token_id
+DELETE  /users/:user_id/tokens/:token_id
+
+GET     /users/:user_id/webhooks
+POST    /users/:user_id/webhooks
+
+PUT     /users/:user_id/webhooks/:webhook_id
+DELETE  /users/:user_id/webhooks/:webhook_id
+
+runs
+====================================
+GET     /runs
+POST    /runs
+
+GET     /runs/:run_id
+PUT     /runs/:run_id
+DELETE  /runs/:run_id
+
+packs
+=====================================
+* GET     /packs
+* POST    /packs
+
+* GET     /packs/:pack_id
+* PUT     /packs/:pack_id
+* DELETE  /packs/:pack_id
+
+GET     /packs/:pack_id/missions
+POST    /packs/:pack_id/missions
+
+GET     /packs/:pack_id/missions/:mission_id
+PUT     /packs/:pack_id/missions/:mission_id
+DELETE  /packs/:pack_id/missions/:mission_id

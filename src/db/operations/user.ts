@@ -26,3 +26,7 @@ export async function getOrCreateUser(
     await userRepository.save(new User(id, username));
     return await userRepository.findOne(id);
 }
+
+export async function getUser(id: string): Promise<User | undefined> {
+    return await getRepository(User).findOne(id);
+}
