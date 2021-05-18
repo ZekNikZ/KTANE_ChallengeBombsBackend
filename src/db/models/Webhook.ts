@@ -6,7 +6,7 @@ export default class Webhook {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @ManyToOne(() => User, (user) => user.webhooks)
+    @ManyToOne(() => User, (user) => user.webhooks, { onDelete: 'CASCADE' })
     owner!: User;
 
     @Column()
