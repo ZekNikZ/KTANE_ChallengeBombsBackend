@@ -30,7 +30,7 @@ export default class Bomb {
     @Column('smallint')
     strikeCount!: number;
 
-    @OneToMany(() => Pool, (pool) => pool.bomb)
+    @OneToMany(() => Pool, (pool) => pool.bomb, { cascade: ['insert'] })
     pools!: Pool[];
 
     constructor(

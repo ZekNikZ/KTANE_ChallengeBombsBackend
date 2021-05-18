@@ -5,7 +5,7 @@ import {
     getAllPacks,
     updatePack,
 } from '../../../db/operations/pack';
-import { mustBeOwnerOrRole, requiresRole } from '../../../roles/middleware';
+import { mustBePackOwnerOrRole, requiresRole } from '../../../roles/middleware';
 import Role from '../../../enums/Role';
 import { Router } from 'express';
 import checkProps from '../../../util/checkProps';
@@ -45,7 +45,7 @@ router
     .get((req, res) => {
         res.send(req.data?.pack);
     })
-    .put(mustBeOwnerOrRole(Role.MODERATOR), async (req, res) => {
+    .put(mustBePackOwnerOrRole(Role.MODERATOR), async (req, res) => {
         const pack = await updatePack(req.data?.pack, req.body);
         if (pack) {
             res.send(pack);
@@ -53,7 +53,7 @@ router
             status.badRequest(res);
         }
     })
-    .delete(mustBeOwnerOrRole(Role.MODERATOR), async (req, res) => {
+    .delete(mustBePackOwnerOrRole(Role.MODERATOR), async (req, res) => {
         if (await deletePack(req.data?.pack)) {
             status.success(res);
         } else {

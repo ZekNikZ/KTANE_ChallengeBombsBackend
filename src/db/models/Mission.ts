@@ -14,7 +14,7 @@ export default class Mission {
     @ManyToOne(() => Pack, (pack) => pack.missions, { onDelete: 'CASCADE' })
     pack!: Pack;
 
-    @OneToMany(() => Bomb, (bomb) => bomb.mission)
+    @OneToMany(() => Bomb, (bomb) => bomb.mission, { cascade: ['insert'] })
     bombs!: Bomb[];
 
     @OneToMany(() => Run, (run) => run.mission)

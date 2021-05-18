@@ -4,7 +4,10 @@ import {
     deleteMission,
     getAllPackMissions,
 } from '../../../db/operations/mission';
-import { mustBeOwnerOrRole, requiresRole } from '../../../roles/middleware';
+import {
+    mustBeMissionOwnerOrRole,
+    mustBePackOwnerOrRole,
+} from '../../../roles/middleware';
 import Role from '../../../enums/Role';
 import { Router } from 'express';
 import checkProps from '../../../util/checkProps';
@@ -17,7 +20,7 @@ router
     .get(async (req, res) => {
         res.send(await getAllPackMissions(req.data?.pack));
     })
-    .post(requiresRole(Role.USER), async (req, res) => {
+    .post(mustBePackOwnerOrRole(Role.ADMIN), async (req, res) => {
         if (!checkProps(req.body, 'name', 'missionId')) {
             status.badRequest(res);
             return;
@@ -41,11 +44,21 @@ router
     .get((req, res) => {
         res.send(req.data?.mission);
     })
-    .put(mustBeOwnerOrRole(Role.MODERATOR), async (req, res) => {
-        // TODO: complete
-        res.send('Not implemented');
+    .put(mustBeMissionOwnerOrRole(Role.MODERATOR), async (req, res) => {
+        await deleteMission(req.data?.mission);
+
+        const { missionId, name, bombs } = req.body;
+
+        const mission = await createMission(
+            missionId,
+            req.data?.pack,
+            name,
+            bombs
+        );
+
+        res.send(mission);
     })
-    .delete(mustBeOwnerOrRole(Role.MODERATOR), async (req, res) => {
+    .delete(mustBeMissionOwnerOrRole(Role.MODERATOR), async (req, res) => {
         if (await deleteMission(req.data?.mission)) {
             status.success(res);
         } else {
