@@ -7,12 +7,13 @@ import multer from 'multer';
 // Routers
 import apiRouter from './routes/api/v1/';
 import authRouter from './routes/auth/discordoauth';
+import cors from 'cors';
 
 const app = express();
 
 // Middleware
+app.use(cors()); // TODO: more specific CORS policy
 app.use(express.json());
-app.use(multer().single('profile'));
 applyInsecureJWT(app);
 
 // Apply routes

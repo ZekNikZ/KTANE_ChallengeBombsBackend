@@ -44,3 +44,8 @@ export async function deleteMission(mission: Mission): Promise<boolean> {
         return false;
     }
 }
+
+export async function getAllMissions(): Promise<Mission[]> {
+    // TODO: filter by approved packs
+    return await getRepository(Mission).find({ relations: ['pack'] });
+}
